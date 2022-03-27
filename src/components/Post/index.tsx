@@ -1,4 +1,10 @@
-import {View, TouchableWithoutFeedback, Text, Image} from 'react-native';
+import {
+  View,
+  TouchableWithoutFeedback,
+  Text,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState} from 'react';
 
 import Video from 'react-native-video';
@@ -7,13 +13,24 @@ import styles from './styles';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
+import Fontisto from 'react-native-vector-icons/Fontisto';
 
-const Post = () => {
+const Post = props => {
   const [paused, setPaused] = useState(false);
+  const [post, setPost] = useState(props.post);
+  const [isLike, setIsLike] = useState(false);
 
   const onPlayPausePress = () => {
     setPaused(!paused);
+  };
+  const likeToAdd = isLike ? -1 : 1;
+
+  const onLikePres = () => {
+    setPost({
+      ...post,
+      likes: post.likes + likeToAdd,
+    });
+    setIsLike(!isLike);
   };
   return (
     <View style={styles.container}>
@@ -31,18 +48,22 @@ const Post = () => {
           />
           <View style={styles.uiContainer}>
             <View style={styles.rightContainer}>
-              <View style={styles.profilePictureContainer}>
-                <Image
-                  style={styles.profilePictures}
-                  source={{
-                    uri: 'https://upload.wikimedia.org/wikipedia/commons/9/92/Roman_Reigns_Tribute_to_the_Troops_2016.jpg',
-                  }}
+              <Image
+                style={styles.profilePictures}
+                source={{
+                  uri: 'https://upload.wikimedia.org/wikipedia/commons/9/92/Roman_Reigns_Tribute_to_the_Troops_2016.jpg',
+                }}
+              />
+              <TouchableOpacity
+                style={styles.iconContainer}
+                onPress={onLikePres}>
+                <AntDesign
+                  name={'heart'}
+                  size={40}
+                  color={isLike ? 'red' : 'white'}
                 />
-              </View>
-              <View style={styles.iconContainer}>
-                <AntDesign name={'hearto'} size={40} color="white" />
-                <Text style={styles.statsLabel}>124</Text>
-              </View>
+                <Text style={styles.statsLabel}>123</Text>
+              </TouchableOpacity>
 
               <View style={styles.iconContainer}>
                 <FontAwesome name={'commenting'} size={40} color="white" />
@@ -50,7 +71,7 @@ const Post = () => {
               </View>
 
               <View style={styles.iconContainer}>
-                <FontAwesome5 name={'share'} size={40} color="white" />
+                <Fontisto name={'share-a'} size={40} color="white" />
                 <Text style={styles.statsLabel}>124</Text>
               </View>
             </View>
