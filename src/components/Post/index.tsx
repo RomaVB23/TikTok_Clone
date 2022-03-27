@@ -1,8 +1,13 @@
-import {View, TouchableWithoutFeedback} from 'react-native';
+import {View, TouchableWithoutFeedback, Text, Image} from 'react-native';
 import React, {useState} from 'react';
 
 import Video from 'react-native-video';
 import styles from './styles';
+
+import Entypo from 'react-native-vector-icons/Entypo';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 const Post = () => {
   const [paused, setPaused] = useState(false);
@@ -13,22 +18,65 @@ const Post = () => {
   return (
     <View style={styles.container}>
       <TouchableWithoutFeedback onPress={onPlayPausePress}>
-        <Video
-          style={styles.video}
-          resizeMode={'cover'}
-          repeat={true}
-          paused={paused}
-          onError={e => console.log(e)}
-          source={{
-            uri: 'https://d8vywknz0hvjw.cloudfront.net/fitenium-media-prod/videos/45fee890-a74f-11ea-8725-311975ea9616/proccessed_720.mp4',
-          }}
-        />
+        <View>
+          <Video
+            style={styles.video}
+            resizeMode={'cover'}
+            repeat={true}
+            paused={paused}
+            onError={e => console.log(e)}
+            source={{
+              uri: 'https://d8vywknz0hvjw.cloudfront.net/fitenium-media-prod/videos/45fee890-a74f-11ea-8725-311975ea9616/proccessed_720.mp4',
+            }}
+          />
+          <View style={styles.uiContainer}>
+            <View style={styles.rightContainer}>
+              <View style={styles.profilePictureContainer}>
+                <Image
+                  style={styles.profilePictures}
+                  source={{
+                    uri: 'https://upload.wikimedia.org/wikipedia/commons/9/92/Roman_Reigns_Tribute_to_the_Troops_2016.jpg',
+                  }}
+                />
+              </View>
+              <View style={styles.iconContainer}>
+                <AntDesign name={'hearto'} size={40} color="white" />
+                <Text style={styles.statsLabel}>124</Text>
+              </View>
+
+              <View style={styles.iconContainer}>
+                <FontAwesome name={'commenting'} size={40} color="white" />
+                <Text style={styles.statsLabel}>124</Text>
+              </View>
+
+              <View style={styles.iconContainer}>
+                <FontAwesome5 name={'share'} size={40} color="white" />
+                <Text style={styles.statsLabel}>124</Text>
+              </View>
+            </View>
+
+            <View style={styles.bottomContainer}>
+              <View>
+                <Text style={styles.handle}>@romavb</Text>
+                <Text style={styles.description}>work hard man @borat</Text>
+
+                <View style={styles.songRow}>
+                  <Entypo name={'beamed-note'} size={24} color="white" />
+                  <Text style={styles.songName}>Nf - The search</Text>
+                </View>
+              </View>
+              <Image
+                style={styles.songImage}
+                source={{
+                  uri: 'https://upload.wikimedia.org/wikipedia/commons/9/92/Roman_Reigns_Tribute_to_the_Troops_2016.jpg',
+                }}
+              />
+            </View>
+          </View>
+        </View>
       </TouchableWithoutFeedback>
     </View>
   );
 };
 
 export default Post;
-function data(data: any, arg1: string) {
-  throw new Error('Function not implemented.');
-}
