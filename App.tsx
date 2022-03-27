@@ -7,24 +7,24 @@
  *
  * @format
  */
-
+import 'react-native-gesture-handler';
 import React from 'react';
-import {SafeAreaView, StatusBar, useColorScheme} from 'react-native';
+import {SafeAreaView, StatusBar} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-import Home from './src/screens/Home';
-
+import Navigation from './src/navigation';
 const App = () => {
-  const isDarkMode = useColorScheme() === 'dark';
   const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+    // backgroundColor: Colors.darker,
+    backgroundColor: 'black',
   };
   //
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Home />
+    // eslint-disable-next-line react-native/no-inline-styles
+    <SafeAreaView style={[backgroundStyle, {flex: 1}]}>
+      <StatusBar barStyle={'light-content'} />
+      <Navigation />
     </SafeAreaView>
   );
 };
