@@ -1,12 +1,29 @@
-import {View, Text} from 'react-native';
+import {View, TouchableWithoutFeedback} from 'react-native';
 import React from 'react';
 
+import Video from 'react-native-video';
+import styles from './styles';
+
 const Post = () => {
+  const onPlayPausePress = () => {};
   return (
-    <View>
-      <Text>Post</Text>
+    <View style={styles.container}>
+      <TouchableWithoutFeedback onPress={onPlayPausePress}>
+        <Video
+          style={styles.video}
+          resizeMode={'cover'}
+          repeat={true}
+          onError={e => console.log(e)}
+          source={{
+            uri: 'https://d8vywknz0hvjw.cloudfront.net/fitenium-media-prod/videos/45fee890-a74f-11ea-8725-311975ea9616/proccessed_720.mp4',
+          }}
+        />
+      </TouchableWithoutFeedback>
     </View>
   );
 };
 
 export default Post;
+function data(data: any, arg1: string) {
+  throw new Error('Function not implemented.');
+}
